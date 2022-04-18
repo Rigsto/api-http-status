@@ -4,23 +4,27 @@ declare(strict_types=1);
 
 namespace Rigsto\ApiHttpStatus;
 
-class ApiResources
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
+use phpDocumentor\Reflection\Types\AbstractList;
+
+class ApiResources extends JsonResource
 {
     /**
      * Generate API response with status code and message.
      * @param HttpStatus $status
      * @param string|null $message
      * @param mixed|null $data
-     * @return string|false
+     * @return JsonResponse
      */
-    public static function generateResponse(HttpStatus $status, string $message = null, mixed $data = null): bool|string
+    public static function generateResponse(HttpStatus $status, string $message = null, mixed $data = null): JsonResponse
     {
-        return json_encode([
-                'success' => $status->isSuccess(),
-                'code' => $status->getStatusCode(),
-                'message' => $message ?? $status->getName(),
-                'data' => $data,
-            ], $status->getStatusCode());
+        return new JsonResponse([
+            'success' => $status->isSuccess(),
+            'code' => $status->getStatusCode(),
+            'message' => $message ?? $status->getName(),
+            'data' => $data,
+        ], $status->getStatusCode());
     }
 
     /**
@@ -28,11 +32,11 @@ class ApiResources
      * @param HttpStatus $status
      * @param string|null $message
      * @param mixed|null $data
-     * @return string|false
+     * @return JsonResponse
      */
-    public static function generatePaginationResponse(HttpStatus $status, string $message = null, mixed $data = null): bool|string
+    public static function generatePaginationResponse(HttpStatus $status, string $message = null, mixed $data = null): JsonResponse
     {
-        return json_encode([
+        return new JsonResponse([
                 'success' => $status->isSuccess(),
                 'code' => $status->getStatusCode(),
                 'message' => $message ?? $status->getName(),

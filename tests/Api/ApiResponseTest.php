@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Api;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use PHPUnit\Framework\TestCase;
 use Rigsto\ApiHttpStatus\ApiResources;
 use Rigsto\ApiHttpStatus\HttpStatus;
@@ -17,15 +19,15 @@ class ApiResponseTest extends TestCase
             'email' => 'asd@gmail.com'
         ];
 
-        $dummyResponse = json_encode([
+        $dummyResponse = [
             'success' => true,
             'code' => 200,
             'message' => 'Ok',
             'data' => $dummyData
-        ]);
+        ];
         ;
         $response = ApiResources::generateResponse(HttpStatus::OK, null, $dummyData);
-        self::assertEquals(json_decode($response), json_decode($dummyResponse));
+        self::assertEquals($response->getOriginalContent(), $dummyResponse);
     }
 
     public function testCorrectResponse2(){
@@ -40,14 +42,14 @@ class ApiResponseTest extends TestCase
             ]
         ];
 
-        $dummyResponse = json_encode([
+        $dummyResponse = [
             'success' => true,
             'code' => 200,
             'message' => 'Ok',
             'data' => $dummyData
-        ]);
+        ];
 
         $response = ApiResources::generateResponse(HttpStatus::OK, null, $dummyData);
-        self::assertEquals(json_decode($response), json_decode($dummyResponse));
+        self::assertEquals($response->getOriginalContent(), $dummyResponse);
     }
 }
