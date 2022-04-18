@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Rigsto\ApiHttpStatus;
 
-enum HttpStatus: int
+use Rigsto\ApiHttpStatus\Interfaces\HttpFunction;
+
+enum HttpStatus: int implements HttpFunction
 {
     /**
      * The server has received the request headers and the client should proceed to send the request body (in the case
@@ -569,4 +571,73 @@ enum HttpStatus: int
      */
     case NETWORK_CONNECT_TIMEOUT_ERROR = 599;
 
+    /**
+     * Get http status code from enums
+     * @return int
+     */
+    public function getStatusCode(): int
+    {
+        return $this->value;
+    }
+
+    /**
+     * Get http status name from enums
+     * @return string
+     */
+    public function getName(): string
+    {
+        $strReplace = str_replace('_', ' ', $this->name);
+        $strLower = strtolower($strReplace);
+        return ucwords($strLower);
+    }
+
+    /**
+     * Get http status category from enums
+     * @return string
+     */
+    public function getCategory(): string
+    {
+        $code = $this->value;
+        if ($code >= 100 && $code < 200) {
+            return 'Informational';
+        } elseif ($code >= 200 && $code < 300) {
+            return 'Success';
+        } elseif ($code >= 300 && $code < 400) {
+            return 'Redirection';
+        } elseif ($code >= 400 && $code < 500) {
+            return 'Client Error';
+        } elseif ($code >= 500 && $code < 600) {
+            return 'Server Error';
+        } else {
+            return 'Unknown Error';
+        }
+    }
+
+    /**
+     * Check success status code
+     * @return bool
+     */
+    public function isSuccess(): bool
+    {
+        $code = $this->value;
+        if ($code >= 200 && $code < 300) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check if status code is valid
+     * @return bool
+     */
+    public function isValidCode(): bool
+    {
+        $cases = HttpStatus::cases();
+        if (in_array($this->value, $cases)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
