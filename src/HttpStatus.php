@@ -317,7 +317,7 @@ enum HttpStatus: int implements HttpFunction
      * should be returned by teapots requested to brew coffee. This HTTP status is used as an Easter egg in some websites,
      * such as Google.com's I'm a teapot easter egg.
      */
-    case I_M_A_TEAPOT = 418;
+    case IM_A_TEAPOT = 418;
 
     /**
      * Used by the Laravel Framework when a CSRF Token is missing or expired.
@@ -628,16 +628,34 @@ enum HttpStatus: int implements HttpFunction
     }
 
     /**
-     * Check if status code is valid
+     * Check if given code is valid
+     * @param int $code
      * @return bool
      */
-    public function isValidCode(): bool
+    public static function isValidCode(int $code): bool
     {
         $cases = HttpStatus::cases();
-        if (in_array($this->value, $cases)) {
-            return true;
-        } else {
-            return false;
+        foreach ($cases as $case){
+            if ($case->value == $code){
+                return true;
+            }
         }
+        return false;
+    }
+
+    /**
+     * Get Http Status from given code
+     * @param int $code
+     * @return HttpStatus|null
+     */
+    public static function fromCode(int $code): ?HttpStatus
+    {
+        $cases = HttpStatus::cases();
+        foreach ($cases as $case){
+            if ($case->value == $code){
+                return $case;
+            }
+        }
+        return null;
     }
 }
