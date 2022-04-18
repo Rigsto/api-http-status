@@ -1,0 +1,21 @@
+{
+  "name": "Rigsto/api-http-status",
+  "description": "HTTP status codes and resources for API usages",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "role": "Developer",
+      "name": "Auriga Aristo",
+      "email": "aurigaaristo@gmail.com",
+      "homepage": "https://aurigaaristo.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Rigsto\\ApiHttpStatus\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
