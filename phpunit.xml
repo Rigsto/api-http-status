@@ -13,18 +13,17 @@
          stopOnFailure="false">
 
     <testsuites>
-        <testsuite name="PHPUnit">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="Api">
+            <directory suffix="Test.php">./tests/Api</directory>
+        </testsuite>
+        <testsuite name="Http">
+            <directory suffix="Test.php">./tests/Http</directory>
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist>
+    <coverage processUncoveredFiles="true">
+        <include>
             <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
-
-    <logging>
-        <log type="coverage-html" target="build/coverage-html" lowUpperBound="35" highLowerBound="90" />
-    </logging>
+        </include>
+    </coverage>
 </phpunit>
