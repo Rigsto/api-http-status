@@ -1,4 +1,9 @@
 # Http Status Codes and API Response
+![run-tests](https://github.com/Rigsto/api-http-status/workflows/run-tests/badge.svg)
+[![Latest Version](https://img.shields.io/github/v/release/rigsto/api-http-status?label=Release&sort=semver)](https://github.com/Rigsto/api-http-status/releases)
+[![Packagist Version](https://img.shields.io/packagist/v/rigsto/api-http-status?label=Packagist)](https://packagist.org/packages/rigsto/api-http-status)
+[![PHP Version Required](https://img.shields.io/packagist/php-v/rigsto/api-http-status?label=PHP%20Version)]()
+[![MIT License](https://img.shields.io/github/license/rigsto/api-http-status)](LICENSE)
 
 A simple enum class for HTTP status codes and their associated API response.
 
