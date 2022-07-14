@@ -53,4 +53,26 @@ class ApiResources extends JsonResource
                 ]
             ], $status->getStatusCode());
     }
+
+    /**
+     * Generate success API response
+     * @param string|null $message
+     * @param mixed|null $data
+     * @retyrn JsonResponse
+     */
+    public static function generateSuccessResponse(string $message = null, mixed $data = null): JsonResponse
+    {
+        return static::generateResponse(HttpStatus::OK, $message, $data);
+    }
+
+    /**
+     * Generate success API response with pagination
+     * @param string|null $message
+     * @param mixed|null $data
+     * @retyrn JsonResponse
+     */
+    public static function generatePaginationSuccessResponse(string $message = null, mixed $data = null): JsonResponse
+    {
+        return static::generatePaginationResponse(HttpStatus::OK, $message, $data);
+    }
 }

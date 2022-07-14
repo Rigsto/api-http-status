@@ -10,7 +10,7 @@ A simple enum class for HTTP status codes and their associated API response.
 All codes are taken from [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
 ## Installation
-Using composer;
+Using composer:
 ```bash
 $ composer require rigsto/api-http-status
 ```
@@ -96,6 +96,23 @@ $response = ApiResponse::generateResponse(HttpStatus::BAD_REQUEST, 'Custom Messa
 
 $response = ApiResponse::generateResponse(HttpStatus::INTERNAL_SERVER_ERROR, null, null);
 // {"success": false, "code": 500, "message": "Internal Server Error", "data": null}
+```
+
+`generateSuccessResponse(?message, ?data)` will return json string of the http status, message, and data. This method is same with function above but it generates response with `HttpStatus::OK` as http status.
+```php
+<?php
+
+use Rigsto\ApiHttpStatus\ApiResources;
+
+$data = [...];
+$response = ApiResources::generateSuccessResponse();
+// {"success": true, "code": 200, "message": "Ok", "data": null}
+
+$response = ApiResources::generateSuccessResponse(message: 'Custom Message');
+// {"success": true, "code": 200, "message": "Custom Message", "data": null}
+
+$response = ApiResources::generateSuccessResponse(data: $data);
+// {"success": true, "code": 200, "message": "Ok", "data": [...]}
 ```
 
 `generatePaginationResponse(HttpStatus, ?message, ?data` will return json string of http status, message, and paginate data.<br>
