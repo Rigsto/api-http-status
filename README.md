@@ -98,7 +98,7 @@ $response = ApiResponse::generateResponse(HttpStatus::INTERNAL_SERVER_ERROR, nul
 // {"success": false, "code": 500, "message": "Internal Server Error", "data": null}
 ```
 
-`generateSuccessResponse(?message, ?data)` will return json string of the http status, message, and data. This method is same with function above but it generates response with `HttpStatus::OK` as http status.
+`generateSuccessResponse(?message, ?data)` will return json string of the http status, message, and data. This method is same with function above, but it generates response with `HttpStatus::OK` as http status.
 ```php
 <?php
 
@@ -113,6 +113,16 @@ $response = ApiResources::generateSuccessResponse(message: 'Custom Message');
 
 $response = ApiResources::generateSuccessResponse(data: $data);
 // {"success": true, "code": 200, "message": "Ok", "data": [...]}
+```
+
+`generateUnauthorizedResponse()` will return json string with unauthorized http status and message.
+```php
+<?php
+
+use Rigsto\ApiHttpStatus\ApiResources;
+
+$response = ApiResources::generateUnauthorizedResponse();
+// {"success": false, "code": 401, "message": "Unauthorized", "data": null}
 ```
 
 `generatePaginationResponse(HttpStatus, ?message, ?data` will return json string of http status, message, and paginate data.<br>

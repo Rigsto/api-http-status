@@ -75,4 +75,13 @@ class ApiResources extends JsonResource
     {
         return static::generatePaginationResponse(HttpStatus::OK, $message, $data);
     }
+
+    /**
+     * Generate unauthorized API response
+     * @return JsonResponse
+     */
+    public static function generateUnauthorizedResponse(): JsonResponse
+    {
+        return static::generateResponse(HttpStatus::UNAUTHORIZED);
+    }
 }
