@@ -6,7 +6,6 @@ namespace Rigsto\ApiHttpStatus;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use phpDocumentor\Reflection\Types\AbstractList;
 
 class ApiResources extends JsonResource
 {
